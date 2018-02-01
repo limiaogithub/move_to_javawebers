@@ -14,7 +14,7 @@ public class CommonPageService implements PageConvert {
         String pageSize = request.getParameter("pageSize");
         String currentPage = request.getParameter("currentPage");
         Integer pageSize1 = StringUtils.isEmpty(pageSize) ? 10 : Integer.valueOf(pageSize);
-        Integer currentPage1 = StringUtils.isEmpty(currentPage) ? 1 : Integer.valueOf(pageSize);
+        Integer currentPage1 = StringUtils.isEmpty(currentPage) ? 1 : Integer.valueOf(currentPage);
         queryHandler.setStart((currentPage1 - 1) * pageSize1);
         queryHandler.setLimit(pageSize1);
     }
