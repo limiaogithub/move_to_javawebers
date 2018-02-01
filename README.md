@@ -9,6 +9,7 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 当然您可以仅使用yt_mybatis的CURD部分。如果您是新项目，欢迎您使用整体解决方案；如果您的历史项目，您可以很快集成CURD。</br>
 
 您可以下载https://github.com/limiaogithub/yt_mybatis_example 直接运行示例代码。</br>
+您还可以下载https://github.com/limiaogithub/yt_antd_pro 结合前后端一起运行查看增删改查效果。</br>
 
 <h3>a.简单CURD的集成(仅需两步)</h3></br>
 1.引入maven依赖</br>
