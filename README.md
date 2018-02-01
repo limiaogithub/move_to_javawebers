@@ -18,7 +18,11 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 4.支持json格式返回。</br>
 5.支持spring-boot。</br>
 6.近期支持代码生成器。</br>
-</br>
+
+<h3>准备</h3></br>
+1.mysql数据库
+2.idea开发工具
+3.大约10分钟
 
 <h3>a.简单CURD的集成(仅需两步)</h3></br>
 1.引入maven依赖</br>
