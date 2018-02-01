@@ -12,12 +12,13 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 您还可以下载https://github.com/limiaogithub/yt_antd_pro 结合前后端一起运行查看增删改查效果。</br>
 
 <h3>特性</h3>
-1.支持CURD单表操作，多表请写xml</br
-2.支持domain默认值自动注入，可以自定义注入值</br>
-3.支持limit分页，可以自定义获取limit offset值</br>
-4.支持json格式返回</br>
+1.一键接入增删改查</br>
+2.支持CURD单表操作，多表请写xml</br
+3.支持domain默认值自动注入，可以自定义注入值</br>
+4.支持limit分页，可以自定义获取limit offset值</br>
 5.支持spring-boot</br>
-6.近期支持代码生成器</br>
+6.提供BaseAccidentException和BaseErrorException</br>
+7.近期支持代码生成器</br>
 
 <h3>准备</h3>
 1.mysql数据库</br>
@@ -34,7 +35,7 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 &lt;/dependency&gt;</br>
 
 2.你的mapper继承BaseMapper<T></br>
-如：
+如：</br>
 public interface TestMapper extends BaseMapper<MemberT> {</br>
 </br>
 }</br>
