@@ -31,7 +31,7 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 &lt;dependency&gt;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;com.github.limiaogithub&lt;/groupId&gt;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;yt_mybatis&lt;/artifactId&gt;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;1.0&lt;/version&gt;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.0&lt;/version&gt;</br>
 &lt;/dependency&gt;</br>
 </br>
 2.你的mapper继承BaseMapper<T></br>
@@ -47,7 +47,7 @@ public interface TestMapper extends BaseMapper<MemberT> {</br>
 &lt;dependency&gt;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;com.github.limiaogithub&lt;/groupId&gt;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;yt_mybatis&lt;/artifactId&gt;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;1.0&lt;/version&gt;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.0&lt;/version&gt;</br>
 &lt;/dependency&gt;</br>
 </br>
 2.你的mapper继承BaseMapper<T></br>
