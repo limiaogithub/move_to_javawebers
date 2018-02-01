@@ -35,7 +35,7 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 &lt;/dependency&gt;</br>
 
 2.你的mapper继承BaseMapper<T></br>
-如：</br>
+</br>
 public interface TestMapper extends BaseMapper<MemberT> {</br>
 </br>
 }</br>
@@ -52,7 +52,7 @@ public interface TestMapper extends BaseMapper<MemberT> {</br>
 &lt;/dependency&gt;</br>
 
 2.你的mapper继承BaseMapper<T></br>
-如：
+</br>
 public interface TestMapper extends BaseMapper<MemberT> {</br>
 </br>
 }</br>
