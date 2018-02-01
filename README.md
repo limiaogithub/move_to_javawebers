@@ -4,10 +4,9 @@
 请加QQ群~ 489333310，群里有一些大神~</h3>
 </br>
 </br>
+yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请求到数据库，再返回给前端的一整套解决方案</br>
 
-yt_mybatis不仅是基于mybaits封装的CURD项目，他提供了从web端请求到数据库，再返回给前端请求的一整套解决方案</br>
-
-当然你可以仅使用yt_mybatis的CURD部分。如果您是新项目，欢迎您使用整体解决方案；如果您的历史项目，您可以很快集成CURD。</br>
+当然您可以仅使用yt_mybatis的CURD部分。如果您是新项目，欢迎您使用整体解决方案；如果您的历史项目，您可以很快集成CURD。</br>
 
 您可以下载https://github.com/limiaogithub/yt_mybatis_example 直接运行示例代码。</br>
 
