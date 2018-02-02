@@ -38,7 +38,7 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 </pre>
 2.你的mapper继承BaseMapper<T></br>
 <pre>
-public interface TestMapper extends BaseMapper<MemberT> {
+public interface TestMapper extends BaseMapper&lt;MemberT&gt; {
 </br>
 }
 </pre>
@@ -47,6 +47,7 @@ public interface TestMapper extends BaseMapper<MemberT> {
 </hr>
 <h4>b.整体解决方案的集成</h4></br>
 一般的j2ee后台结构包括controller、service、serviceImpl、mapper、domain，本文按照这种结构提供示例。</br>
+本文domain以MemberT作为示例</br>
 
 1.引入maven依赖</br>
 <pre>
@@ -58,13 +59,13 @@ public interface TestMapper extends BaseMapper<MemberT> {
 </pre>
 2.你的mapper继承BaseMapper<T></br>
 <pre>
-public interface TestMapper extends BaseMapper<MemberT> {
+public interface TestMapper extends BaseMapper&lt;MemberT&gt; {
 </br>
 }
 </pre>
 3.你的service继承BaseService&lt;T&gt;,</br>
 <pre>
-public interface TestService extends BaseService<MemberT>{
+public interface TestService extends BaseService&lt;MemberT&gt;{
 </br>
 }
 </pre>
@@ -72,7 +73,7 @@ public interface TestService extends BaseService<MemberT>{
 4.你的serviceImpl继承ServiceSupport&lt;T, yourMapper&gt;,这里需要实现getMapper()方法</br>
 <pre>
 @Service
-public class TestServiceImpl extends ServiceSupport<MemberT, TestMapper> implements TestService {
+public class TestServiceImpl extends ServiceSupport&lt;MemberT, TestMapper&gt; implements TestService {
 
     @Resource
     private TestMapper testMapper;
