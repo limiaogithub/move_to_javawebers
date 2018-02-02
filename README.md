@@ -32,7 +32,7 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 &lt;dependency&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;com.github.limiaogithub&lt;/groupId&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;yt_mybatis&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.0&lt;/version&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.1&lt;/version&gt;
 &lt;/dependency&gt;
 </pre>
 </br>
@@ -48,17 +48,21 @@ public interface TestMapper extends BaseMapper<MemberT> {
 </hr>
 <h4>b.整体解决方案的集成</h4></br>
 1.引入maven依赖</br>
-&lt;dependency&gt;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;com.github.limiaogithub&lt;/groupId&gt;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;yt_mybatis&lt;/artifactId&gt;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.0&lt;/version&gt;</br>
-&lt;/dependency&gt;</br>
+<pre>
+&lt;dependency&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;com.github.limiaogithub&lt;/groupId&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;yt_mybatis&lt;/artifactId&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.1&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
 </br>
 2.你的mapper继承BaseMapper<T></br>
-public interface TestMapper extends BaseMapper<MemberT> {</br>
+<pre>
+public interface TestMapper extends BaseMapper<MemberT> {
 </br>
-}</br>
+}
 </br>
+</pre>
 3.你的service继承BaseService&lt;T&gt;,</br>
 4.你的serviceImpl继承ServiceSupport&lt;T, yourMapper&gt;,</br>
 5.你的controller集成BaseController</br>
@@ -72,7 +76,6 @@ public interface TestMapper extends BaseMapper<MemberT> {</br>
 import com.github.yt.generator.JavaCodeGenerator;
 
 public class JavaBuild {
-
 
     @org.testng.annotations.Test
     public void test() {
