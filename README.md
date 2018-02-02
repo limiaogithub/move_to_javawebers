@@ -9,9 +9,7 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 当然您可以仅使用yt_mybatis的CURD部分。如果您是新项目，欢迎您使用整体解决方案；如果您是历史项目，您可以很快集成CURD。</br>
 
 您可以下载https://github.com/limiaogithub/yt_mybatis_example 直接运行示例代码。</br>
-您还可以下载https://github.com/limiaogithub/yt_antd_pro 结合前后端一起运行查看增删改查效果。</br>
-
-yt_antd_pro是前端ant design的解决方案，配合yt_mybatis将是前后端分离的整体解决方案，现在可一键运行测试。</br>
+您还可以下载https://github.com/limiaogithub/yt_antd_pro 结合前后端一起运行查看增删改查效果，这是目前最新的基于react的ant design技术，前后端分离最佳实践</br>
 
 <h3>特性</h3>
 1.免费开源</br>
