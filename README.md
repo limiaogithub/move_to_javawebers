@@ -1,12 +1,12 @@
 # yt_mybatis
 
 </br>
-欢迎加入QQ群~ 489333310，我们一起进步，不限于mybatis。</h3>
+欢迎加入QQ群~ 489333310，我们一起进步，不限于mybatis。
 </br>
 <h3>介绍</h3>
 yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请求到数据库，再返回给前端的一整套解决方案</br>
 
-当然您可以仅使用yt_mybatis的CURD部分。如果您是新项目，欢迎您使用整体解决方案；如果您的历史项目，您可以很快集成CURD。</br>
+当然您可以仅使用yt_mybatis的CURD部分。如果您是新项目，欢迎您使用整体解决方案；如果您是历史项目，您可以很快集成CURD。</br>
 
 您可以下载https://github.com/limiaogithub/yt_mybatis_example 直接运行示例代码。</br>
 您还可以下载https://github.com/limiaogithub/yt_antd_pro 结合前后端一起运行查看增删改查效果。</br>
@@ -18,7 +18,7 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 4.支持limit分页，可以自定义获取limit offset值</br>
 5.支持spring-boot</br>
 6.提供BaseAccidentException和BaseErrorException</br>
-7.近期支持代码生成器</br>
+7.支持代码生成器</br>
 
 <h3>准备</h3>
 1.mysql数据库</br>
@@ -61,6 +61,39 @@ public interface TestMapper extends BaseMapper<MemberT> {</br>
 6.配置完毕，现在你可以体验从请求到返回的所有操作！</br>
 
 
+<h3>代码生成器</h3>
+1.新建JavaBuild类，代码示例如下，运行test()方法即可。</br>
 
+<pre>
+import com.github.yt.generator.JavaCodeGenerator;
+
+public class JavaBuild {
+
+
+    @org.testng.annotations.Test
+    public void test() {
+
+        JavaCodeGenerator generator = new JavaCodeGenerator(
+                "root",
+                "1234",
+                "antdpro",
+                "jdbc:mysql://localhost:3307/antdpro");
+
+        String tableName = "OrderT";
+        String codeName = "订单";
+        String moduleName = "订单";
+        String modulePackage = "com.github.yt.example.order";
+        generator.create(tableName, codeName, moduleName, modulePackage
+                //  , "html"
+                , "bean"
+                , "controller"
+                , "service"
+                , "mapper"
+                , "mapper_xml"
+        );
+    }
+
+}
+</pre>
 
 
