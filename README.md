@@ -64,8 +64,32 @@ public interface TestMapper extends BaseMapper<MemberT> {
 </br>
 </pre>
 3.你的service继承BaseService&lt;T&gt;,</br>
-4.你的serviceImpl继承ServiceSupport&lt;T, yourMapper&gt;,</br>
+<pre>
+public interface TestService extends BaseService<MemberT>{
+</br>
+}
+</pre>
+
+4.你的serviceImpl继承ServiceSupport&lt;T, yourMapper&gt;,这里需要实现getMapper()方法</br>
+<pre>
+@Service
+public class TestServiceImpl extends ServiceSupport<MemberT, TestMapper> implements Test2Service {
+
+    @Resource
+    private TestMapper testMapper;
+
+
+    @Override
+    public TestMapper getMapper() {
+        return testMapper;
+    }
+}
+</pre>
 5.你的controller集成BaseController</br>
+<pre>
+public class MemberController extends BaseController
+</pre>
+
 6.配置完毕，现在你可以体验从请求到返回的所有操作！</br>
 
 
