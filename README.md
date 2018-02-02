@@ -12,14 +12,15 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 您还可以下载https://github.com/limiaogithub/yt_antd_pro 结合前后端一起运行查看增删改查效果。</br>
 
 <h3>特性</h3>
-1.一键接入增删改查</br>
-2.支持CURD单表操作，多表请写xml</br>
-3.支持domain默认值自动注入，可以自定义注入值</br>
-4.支持limit分页，可以重写获取前台请求limit,offset方法</br>
-5.支持spring-boot</br>
-6.提供BaseAccidentException和BaseErrorException</br>
-<b>7.支持代码生成器</b></br>
-<b>8.提供example工程，一键测试运行</b></br>
+1.免费开源</br>
+2.一键接入增删改查</br>
+3.支持CURD单表操作，多表请写xml</br>
+4.支持domain默认值自动注入，可以自定义注入值</br>
+5.支持limit分页，可以重写获取前台请求limit,offset方法</br>
+6.支持spring-boot</br>
+7.提供BaseAccidentException和BaseErrorException</br>
+<b>8.支持代码生成器</b></br>
+<b>9.提供example工程，一键测试运行</b></br>
 
 <h3>准备</h3>
 1.mysql数据库</br>
