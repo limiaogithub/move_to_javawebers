@@ -1,0 +1,88 @@
+package ${modulePackage}.controller;
+
+import javax.annotation.Resource;
+
+import org.springframework.web.bind.annotation.*;
+import com.github.yt.mybatis.handler.QueryHandler;
+import com.github.yt.web.controller.BaseController;
+import com.github.yt.web.result.HttpResultEntity;
+import com.github.yt.web.result.HttpResultHandler;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import ${importPackage}.domain.${className};
+import ${importPackage}.service.${replaceSuffixClassName}Service;
+
+
+/**
+ * ${codeName}控制器
+ *
+ */
+@RestController
+@RequestMapping("/${replaceSuffixLowerName}")
+public class ${replaceSuffixClassName}Controller extends BaseController {
+
+
+	/**
+	 * ${codeName}服务类
+	 */
+	@Resource
+	private ${replaceSuffixClassName}Service ${replaceSuffixLowerName}Service;
+
+    /**
+     * 添加${codeName}
+     */
+    @ApiOperation(value = "add ${lowerName}", notes = "add ${lowerName} notes", response = ${className}.class)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public HttpResultEntity<?> add(@ApiParam(value = "${lowerName}", required = true) @RequestBody ${className} ${lowerName}){
+		${replaceSuffixLowerName}Service.save(${lowerName});
+        return HttpResultHandler.getSuccessResult();
+    }
+
+    /**
+     * 更新${codeName}
+     */
+    @ApiOperation(value = "update ${lowerName}", notes = "update ${lowerName} notes", response = ${className}.class)
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public HttpResultEntity<?> update(@ApiParam(value = "${lowerName}", required = true) @RequestBody ${className} ${lowerName}) {
+		${replaceSuffixLowerName}Service.updateForSelective(${lowerName});
+        return HttpResultHandler.getSuccessResult();
+    }
+
+    /**
+     * 删除${codeName}
+     */
+    @ApiOperation(value = "delete")
+    @RequestMapping(value = "/delete/{${prikey}}", method = RequestMethod.DELETE)
+    public HttpResultEntity<?> delete(@PathVariable String ${prikey}){
+		${replaceSuffixLowerName}Service.delete(${className}.class, ${prikey});
+        return HttpResultHandler.getSuccessResult();
+    }
+
+    /**
+     * 通过id查询${codeName}
+     */
+    @ApiOperation(value = "通过id查询${codeName}")
+    @RequestMapping(value = "/find/{${prikey}}", method = RequestMethod.GET)
+    public HttpResultEntity<?> find(@PathVariable String ${prikey}) throws Exception {
+        return HttpResultHandler.getSuccessResult(${replaceSuffixLowerName}Service.find(${className}.class, ${prikey}));
+    }
+
+    /**
+     * findAll${codeName}
+     */
+    @ApiOperation(value = "findAll${codeName}")
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
+    public HttpResultEntity<?> findAll(${className} ${lowerName},QueryHandler queryHandle) throws Exception {
+        return HttpResultHandler.getSuccessResult(${replaceSuffixLowerName}Service.findAll(${lowerName}, queryHandle.addOrderBy("createDateTime", "desc")));
+    }
+
+    /**
+     * 分页查询${codeName}
+     */
+    @ApiOperation(value = "分页查询${codeName}")
+    @RequestMapping(value = "/getData", method = RequestMethod.GET)
+    public HttpResultEntity<?> getData(${className} ${lowerName},QueryHandler queryHandle) throws Exception {
+        return HttpResultHandler.getSuccessResult(${replaceSuffixLowerName}Service.getData(${lowerName}, queryHandle.addOrderBy("createDateTime", "desc")));
+    }
+
+}

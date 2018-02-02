@@ -1,0 +1,12 @@
+package ${modulePackage}.domain;
+
+import com.github.yt.mybatis.domain.BaseEntity;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
+
+
+##@JsonSerialize(include= JsonSerialize.Inclusion.NON_NULL)
+@javax.persistence.Table(name = "${tableName}")
+public class ${className} extends BaseEntity<${className}>{
+	${feilds}
+}

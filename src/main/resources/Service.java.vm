@@ -1,0 +1,12 @@
+package ${modulePackage}.service;
+
+import com.github.yt.mybatis.service.BaseService;
+import ${modulePackage}.domain.${className};
+
+/**
+ * ${codeName}服务层
+ *
+ */
+public interface ${replaceSuffixClassName}Service extends BaseService<${className}> {
+
+}

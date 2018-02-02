@@ -1,0 +1,13 @@
+package ${modulePackage}.dao;
+
+import ${modulePackage}.domain.${className};
+import com.github.yt.mybatis.dao.BaseMapper;
+
+/**
+ * ${replaceSuffixClassName} Mapper
+ *
+ */
+public interface ${replaceSuffixClassName}Mapper extends BaseMapper<${className}> {
+
+
+}
