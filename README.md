@@ -35,13 +35,11 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.1&lt;/version&gt;
 &lt;/dependency&gt;
 </pre>
-</br>
 2.你的mapper继承BaseMapper<T></br>
 <pre>
 public interface TestMapper extends BaseMapper<MemberT> {
 </br>
 }
-</br>
 </pre>
 3.配置完毕，现在你可以使用TestMapper进行curd操作。</br>
 
@@ -55,13 +53,11 @@ public interface TestMapper extends BaseMapper<MemberT> {
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.1&lt;/version&gt;
 &lt;/dependency&gt;
 </pre>
-</br>
 2.你的mapper继承BaseMapper<T></br>
 <pre>
 public interface TestMapper extends BaseMapper<MemberT> {
 </br>
 }
-</br>
 </pre>
 3.你的service继承BaseService&lt;T&gt;,</br>
 <pre>
