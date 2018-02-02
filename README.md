@@ -18,7 +18,7 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 4.支持limit分页，可以自定义获取limit offset值</br>
 5.支持spring-boot</br>
 6.提供BaseAccidentException和BaseErrorException</br>
-7.支持代码生成器</br>
+7.<span style="color:blue">支持代码生成器</span></br>
 
 <h3>准备</h3>
 1.mysql数据库</br>
@@ -90,7 +90,7 @@ public class MemberController extends BaseController
 
 
 <h3>代码生成器</h3>
-1.新建JavaBuild类，代码示例如下，运行test()方法即可。</br>
+1.新建JavaBuild类，代码示例如下，运行test()方法即可，代码会直接生成在modulePackage配置目录下</br>
 
 <pre>
 import com.github.yt.generator.JavaCodeGenerator;
