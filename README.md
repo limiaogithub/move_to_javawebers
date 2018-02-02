@@ -18,7 +18,7 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 4.支持limit分页，可以自定义获取limit offset值</br>
 5.支持spring-boot</br>
 6.提供BaseAccidentException和BaseErrorException</br>
-7.<span style="color:blue">支持代码生成器</span></br>
+7.<span style="font-color:blue">支持代码生成器</span></br>
 
 <h3>准备</h3>
 1.mysql数据库</br>
