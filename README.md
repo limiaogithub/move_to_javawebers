@@ -46,6 +46,8 @@ public interface TestMapper extends BaseMapper<MemberT> {
 
 </hr>
 <h4>b.整体解决方案的集成</h4></br>
+一般的j2ee后台结构包括controller、service、serviceImpl、mapper、domain，本文按照这种结构提供示例。</br>
+
 1.引入maven依赖</br>
 <pre>
 &lt;dependency&gt;
@@ -70,7 +72,7 @@ public interface TestService extends BaseService<MemberT>{
 4.你的serviceImpl继承ServiceSupport&lt;T, yourMapper&gt;,这里需要实现getMapper()方法</br>
 <pre>
 @Service
-public class TestServiceImpl extends ServiceSupport<MemberT, TestMapper> implements Test2Service {
+public class TestServiceImpl extends ServiceSupport<MemberT, TestMapper> implements TestService {
 
     @Resource
     private TestMapper testMapper;
