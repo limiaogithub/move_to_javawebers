@@ -28,16 +28,18 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 <h3>集成</h3>
 <h4>a.简单CURD的集成(仅需两步)</h4></br>
 1.引入maven依赖</br>
-&lt;dependency&gt;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;com.github.limiaogithub&lt;/groupId&gt;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;yt_mybatis&lt;/artifactId&gt;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.0&lt;/version&gt;</br>
-&lt;/dependency&gt;</br>
+<pre>
+&lt;dependency&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;com.github.limiaogithub&lt;/groupId&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;yt_mybatis&lt;/artifactId&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.0&lt;/version&gt;
+&lt;/dependency&gt;
+</pre>
 </br>
 2.你的mapper继承BaseMapper<T></br>
 <pre>
 public interface TestMapper extends BaseMapper<MemberT> {
-
+</br>
 }
 </br>
 </pre>
