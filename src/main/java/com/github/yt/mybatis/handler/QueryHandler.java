@@ -96,5 +96,16 @@ public class QueryHandler {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         return attributes == null ? null : attributes.getRequest();
     }
+
+    public static String getInSql(String fieldName, int querySize) {
+        if (querySize == 0) {
+            return " (null) ";
+        }
+        String str = "";
+        for (int i = 0; i < querySize; i++) {
+            str = str + ",#{data." + fieldName + "[" + i + "]}";
+        }
+        return "(" + str.replaceFirst(",", "") + ")";
+    }
 }
 

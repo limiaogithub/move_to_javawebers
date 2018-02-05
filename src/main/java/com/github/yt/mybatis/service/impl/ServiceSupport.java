@@ -7,7 +7,6 @@ import com.github.yt.mybatis.domain.BaseEntity;
 import com.github.yt.mybatis.handler.QueryHandler;
 import com.github.yt.mybatis.result.QueryResult;
 import com.github.yt.mybatis.service.BaseService;
-import com.github.yt.mybatis.utils.BeanUtils;
 import com.github.yt.mybatis.utils.JPAUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -88,30 +87,26 @@ public abstract class ServiceSupport<T, M extends BaseMapper<T>> implements Base
 
     @Override
     public List<T> findAll(T entity) {
-        return getMapper().findAll((Class<T>) entity.getClass(), BeanUtils.getValueMap(null, entity));
+        return getMapper().findAll(entity, new QueryHandler());
     }
 
     @Override
     public List<T> findAll(T entity, QueryHandler queryHandler) {
-        if (queryHandler == null) {
-            return getMapper().findAll((Class<T>) entity.getClass(), BeanUtils.getValueMap(queryHandler, entity));
-        } else {
-            return getMapper().findAll((Class<T>) entity.getClass(), BeanUtils.getValueMap(queryHandler, entity)
-                    .chainPutAll(queryHandler == null ? null : queryHandler.getExpandData()));
-        }
+        return getMapper().findAll(entity, queryHandler == null ? new QueryHandler() : queryHandler);
     }
 
     @Override
     public QueryResult<T> getData(T entity, QueryHandler queryHandle) {
         QueryResult<T> qr = new QueryResult();
-        qr.setRecordsTotal(getMapper().pageTotalRecord((Class<T>) entity.getClass(), BeanUtils.getValueMap(queryHandle, entity)
-                .chainPutAll(queryHandle == null ? null : queryHandle.getExpandData())));
+        if (queryHandle == null) {
+            queryHandle = new QueryHandler();
+        }
+        qr.setRecordsTotal(getMapper().pageTotalRecord(entity, queryHandle));
         if (qr.getRecordsTotal() == 0) {
             qr.setData(new ArrayList<T>());
             return qr;
         }
-        qr.setData(getMapper().pageData((Class<T>) entity.getClass(), BeanUtils.getValueMap(queryHandle, entity).chainPutAll
-                (queryHandle == null ? null : queryHandle.getExpandData())));
+        qr.setData(getMapper().findAll(entity, queryHandle));
         return qr;
     }
 

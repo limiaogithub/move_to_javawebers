@@ -4,12 +4,12 @@ import com.github.yt.mybatis.dao.provider.ModifyProvider;
 import com.github.yt.mybatis.dao.provider.RemoveProvider;
 import com.github.yt.mybatis.dao.provider.SaveProvider;
 import com.github.yt.mybatis.dao.provider.SearchProvider;
+import com.github.yt.mybatis.handler.QueryHandler;
 import org.apache.ibatis.annotations.*;
 
 import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 
 public interface BaseMapper<T> {
@@ -19,6 +19,7 @@ public interface BaseMapper<T> {
     String ENTITIES = "entities";
     String ID = "id";
     String DATA = "data";
+    String QUERY_HANDLER = "queryHandler";
     String START = "start";
     String LIMIT = "limit";
 
@@ -88,38 +89,26 @@ public interface BaseMapper<T> {
     @SelectProvider(type = SearchProvider.class, method = "findById")
     T find(@Param(ENTITY_CLASS) Class<T> entityClass, @Param(ID) Serializable id);
 
-
     /**
      * 按条件查询记录集合
      * 此处来写注解，在子类里面生效
      *
-     * @param entityClass 实体类型
-     * @param data        查询条件
+     * @param entity       实体
+     * @param queryHandler 查询条件
      * @return 查询结果列表
      */
     @SelectProvider(type = SearchProvider.class, method = "findAll")
-    List<T> findAll(@Param(ENTITY_CLASS) Class<T> entityClass, @Param(DATA) Map<String, Object> data);
+    List<T> findAll(@Param(ENTITY) T entity, @Param(QUERY_HANDLER) QueryHandler queryHandler);
 
-
-    /**
-     * 获取分页记录总数
-     * 此处来写注解，在子类里面生效
-     *
-     * @param entityClass 业务实体类
-     * @param data        查询条件
-     * @return 实体列表
-     */
-    @SelectProvider(type = SearchProvider.class, method = "findAll")
-    List<T> pageData(@Param(ENTITY_CLASS) Class<T> entityClass, @Param(DATA) Map<String, Object> data);
 
     /**
      * 统计分页记录总数
      *
-     * @param entityClass 业务实体类
-     * @param data        查询条件
+     * @param entity       实体
+     * @param queryHandler 查询条件
      * @return 实体列表
      */
     @SelectProvider(type = SearchProvider.class, method = "pageTotalRecord")
-    Long pageTotalRecord(@Param(ENTITY_CLASS) Class<T> entityClass, @Param(DATA) Map<String, Object> data);
+    Long pageTotalRecord(@Param(ENTITY) T entity, @Param(QUERY_HANDLER) QueryHandler queryHandler);
 
 }

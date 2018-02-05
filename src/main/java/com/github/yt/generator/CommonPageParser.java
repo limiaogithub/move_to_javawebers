@@ -43,7 +43,6 @@ public class CommonPageParser {
 
     static {
         try {
-            // 获取文件模板根路径
             String templateBasePath = CommonPageParser.class.getProtectionDomain().getCodeSource().getLocation().getPath();
             Properties properties = new Properties();
             if (templateBasePath.endsWith(".jar")) {

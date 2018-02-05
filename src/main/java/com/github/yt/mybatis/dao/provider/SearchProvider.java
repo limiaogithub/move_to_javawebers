@@ -4,6 +4,9 @@ package com.github.yt.mybatis.dao.provider;
 import com.github.yt.mybatis.dao.BaseMapper;
 import com.github.yt.mybatis.dao.MapperProvider;
 import com.github.yt.mybatis.exception.BaseErrorException;
+import com.github.yt.mybatis.handler.QueryHandler;
+import com.github.yt.mybatis.utils.BeanUtils;
+import com.github.yt.mybatis.utils.ChainMap;
 import com.github.yt.mybatis.utils.JPAUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -34,7 +37,12 @@ public class SearchProvider extends MapperProvider {
 
     public String findAll(Map<String, Object> param) {
         begin();
-        Class<?> entityClass = (Class) param.get(BaseMapper.ENTITY_CLASS);
+        QueryHandler queryHandler = (QueryHandler) param.get(BaseMapper.QUERY_HANDLER);
+        ChainMap<String, Object> chainMap = BeanUtils.getValueMap(queryHandler, param.get(BaseMapper.ENTITY))
+                .chainPutAll(queryHandler == null ? null : queryHandler.getExpandData());
+        param.put(BaseMapper.DATA, chainMap);
+        param.put(BaseMapper.ENTITY_CLASS, param.get(BaseMapper.ENTITY).getClass());
+        Class<?> entityClass = param.get(BaseMapper.ENTITY).getClass();
         Map<String, Object> map = ((Map<String, Object>) param.get(BaseMapper.DATA));
         String selectColumnSql = createSelectColumnSql(map);
         if (MapUtils.isNotEmpty(map) && map.containsKey("distinct")) {
@@ -49,7 +57,12 @@ public class SearchProvider extends MapperProvider {
 
     public String pageTotalRecord(Map<String, Object> param) {
         begin();
-        Class<?> entityClass = (Class) param.get(BaseMapper.ENTITY_CLASS);
+        QueryHandler queryHandler = (QueryHandler) param.get(BaseMapper.QUERY_HANDLER);
+        ChainMap<String, Object> chainMap = BeanUtils.getValueMap(queryHandler, param.get(BaseMapper.ENTITY))
+                .chainPutAll(queryHandler == null ? null : queryHandler.getExpandData());
+        param.put(BaseMapper.DATA, chainMap);
+        param.put(BaseMapper.ENTITY_CLASS, param.get(BaseMapper.ENTITY).getClass());
+        Class<?> entityClass = param.get(BaseMapper.ENTITY).getClass();
         SELECT(createSelectCountColumnSql(param));
         FROM(getTableNameWithAlias(entityClass));
         createAllWhere(entityClass, (Map<String, Object>) param.get(BaseMapper.DATA), true);
