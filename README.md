@@ -170,6 +170,7 @@ public class MemberController extends BaseController
 </pre>
 
 6.配置完毕，现在你可以体验从请求到返回的所有操作！</br>
+代码较多，请访问https://github.com/limiaogithub/yt_mybatis_example 直接运行示例代码。
 
 
 <h3>代码生成器</h3>
