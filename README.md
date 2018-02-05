@@ -34,7 +34,7 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 &lt;dependency&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;com.github.limiaogithub&lt;/groupId&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;yt_mybatis&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.1&lt;/version&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.2&lt;/version&gt;
 &lt;/dependency&gt;
 </pre>
 2.你的mapper继承BaseMapper<T></br>
@@ -44,7 +44,59 @@ public interface TestMapper extends BaseMapper&lt;MemberT&gt; {
 </br>
 }
 </pre>
-3.配置完毕，现在你可以使用TestMapper进行curd操作。</br>
+3.配置完毕，现在你可以使用TestMapper进行curd操作，示例如下</br>
+<pre>
+@Service
+public class TestServiceImpl implements TestService {
+
+    @Resource
+    private TestMapper testMapper;
+
+    @Override
+    public void test() {
+
+        //测试save
+        MemberT member = new MemberT().setUserName("测试name2").setPhone("18888888888").setAge(30);
+        testMapper.save(member);
+
+        //测试update
+        member.setUserName("修改名称");
+        testMapper.updateForSelective(member);
+
+        //测试findById
+        member = testMapper.find(MemberT.class, member.getMemberId());
+
+        //测试查询，= 、in
+        QueryHandler queryHandler = new QueryHandler();
+        List<String> queryList = new ArrayList<>();
+        queryList.add("18888888888");
+        queryList.add("18888888889");
+
+        queryHandler.addWhereSql("t.age=#{data.age1} and t.phone in" + QueryHandler.getInSql("phone1", queryList.size()));
+        queryHandler.addExpandData("age1", 30);
+        queryHandler.addExpandData("phone1", queryList.toArray());
+
+        //测试findAll
+        List<MemberT> list = testMapper.findAll(new MemberT(), queryHandler);
+
+        //测试分页查询
+        MemberT memberT = new MemberT();
+        memberT.setPhone("18888888888");
+        List<MemberT> list1 = testMapper.findAll(memberT, queryHandler.configPage().setStart(0).setLimit(10));
+        Long total = testMapper.pageTotalRecord(memberT, queryHandler);
+        System.out.println(total);
+
+        //测试逻辑删除（需要你的domain继承BaseEntity）
+        testMapper.logicDelete(MemberT.class, member.getMemberId());
+
+        //测试delete
+        testMapper.delete(MemberT.class, member.getMemberId());
+        
+    }
+
+}
+</pre>
+
 
 </hr>
 <h4>b.整体解决方案的集成</h4></br>
@@ -56,7 +108,7 @@ public interface TestMapper extends BaseMapper&lt;MemberT&gt; {
 &lt;dependency&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;com.github.limiaogithub&lt;/groupId&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;yt_mybatis&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.1&lt;/version&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.2&lt;/version&gt;
 &lt;/dependency&gt;
 </pre>
 2.你的mapper继承BaseMapper<T></br>
