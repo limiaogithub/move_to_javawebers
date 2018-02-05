@@ -96,31 +96,31 @@ public class TestServiceImpl implements TestService {
 </pre>
 输出结果：
 <pre>
-2018-02-05 11:49:24.030 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.save       : ==>  Preparing: INSERT INTO MemberT (userName, age, phone, memberId) VALUES (?, ?, ?, 'b9d8cbd6664640b18eab932d88379b2d') 
-2018-02-05 11:49:24.081 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.save       : ==> Parameters: 测试name2(String), 30(Integer), 18888888888(String)
-2018-02-05 11:49:24.148 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.save       : <==    Updates: 1
-2018-02-05 11:49:24.150 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.s.d.T.updateForSelective         : ==>  Preparing: UPDATE MemberT SET userName = ?, age = ?, phone = ? WHERE (memberId = ?) 
-2018-02-05 11:49:24.152 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.s.d.T.updateForSelective         : ==> Parameters: 修改名称(String), 30(Integer), 18888888888(String), b9d8cbd6664640b18eab932d88379b2d(String)
-2018-02-05 11:49:24.258 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.s.d.T.updateForSelective         : <==    Updates: 1
-2018-02-05 11:49:24.263 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.find       : ==>  Preparing: SELECT * FROM MemberT WHERE (memberId = ?) 
-2018-02-05 11:49:24.264 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.find       : ==> Parameters: b9d8cbd6664640b18eab932d88379b2d(String)
-2018-02-05 11:49:24.293 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.find       : <==      Total: 1
-2018-02-05 11:49:24.320 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.findAll    : ==>  Preparing: SELECT t.* FROM MemberT t WHERE (t.age=? and t.phone in(?,?)) 
-2018-02-05 11:49:24.322 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.findAll    : ==> Parameters: 30(Integer), 18888888888(String), 18888888889(String)
-2018-02-05 11:49:24.327 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.findAll    : <==      Total: 1
-2018-02-05 11:49:24.330 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.findAll    : ==>  Preparing: SELECT t.* FROM MemberT t WHERE (t.phone = ? AND t.age=? and t.phone in(?,?)) limit 0 , 10 
-2018-02-05 11:49:24.331 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.findAll    : ==> Parameters: 18888888888(String), 30(Integer), 18888888888(String), 18888888889(String)
-2018-02-05 11:49:24.337 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.findAll    : <==      Total: 1
-2018-02-05 11:49:24.338 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.s.d.TestMapper.pageTotalRecord   : ==>  Preparing: SELECT count(distinct t.memberId) FROM MemberT t WHERE (t.phone = ? AND t.age=? and t.phone in(?,?)) 
-2018-02-05 11:49:24.339 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.s.d.TestMapper.pageTotalRecord   : ==> Parameters: 18888888888(String), 30(Integer), 18888888888(String), 18888888889(String)
-2018-02-05 11:49:24.347 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.s.d.TestMapper.pageTotalRecord   : <==      Total: 1
-1
-2018-02-05 11:49:24.348 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.s.dao.TestMapper.logicDelete     : ==>  Preparing: UPDATE MemberT SET deleteFlag=1 WHERE (memberId = ?) 
-2018-02-05 11:49:24.349 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.s.dao.TestMapper.logicDelete     : ==> Parameters: b9d8cbd6664640b18eab932d88379b2d(String)
-2018-02-05 11:49:24.381 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.s.dao.TestMapper.logicDelete     : <==    Updates: 1
-2018-02-05 11:49:24.383 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.delete     : ==>  Preparing: DELETE FROM MemberT WHERE (memberId = ?) 
-2018-02-05 11:49:24.384 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.delete     : ==> Parameters: b9d8cbd6664640b18eab932d88379b2d(String)
-2018-02-05 11:49:24.413 DEBUG 8544 --- [nio-8080-exec-1] c.g.y.e.simple.dao.TestMapper.delete     : <==    Updates: 1
+ ==>  Preparing: INSERT INTO MemberT (userName, age, phone, memberId) VALUES (?, ?, ?, 'b9d8cbd6664640b18eab932d88379b2d') 
+ ==> Parameters: 测试name2(String), 30(Integer), 18888888888(String)
+ <==    Updates: 1
+ ==>  Preparing: UPDATE MemberT SET userName = ?, age = ?, phone = ? WHERE (memberId = ?) 
+ ==> Parameters: 修改名称(String), 30(Integer), 18888888888(String), b9d8cbd6664640b18eab932d88379b2d(String)
+ <==    Updates: 1
+ ==>  Preparing: SELECT * FROM MemberT WHERE (memberId = ?) 
+ ==> Parameters: b9d8cbd6664640b18eab932d88379b2d(String)
+ <==      Total: 1
+ ==>  Preparing: SELECT t.* FROM MemberT t WHERE (t.age=? and t.phone in(?,?)) 
+ ==> Parameters: 30(Integer), 18888888888(String), 18888888889(String)
+ <==      Total: 1
+ ==>  Preparing: SELECT t.* FROM MemberT t WHERE (t.phone = ? AND t.age=? and t.phone in(?,?)) limit 0 , 10 
+ ==> Parameters: 18888888888(String), 30(Integer), 18888888888(String), 18888888889(String)
+ <==      Total: 1
+ ==>  Preparing: SELECT count(distinct t.memberId) FROM MemberT t WHERE (t.phone = ? AND t.age=? and t.phone in(?,?)) 
+ ==> Parameters: 18888888888(String), 30(Integer), 18888888888(String), 18888888889(String)
+ <==      Total: 1
+
+ ==>  Preparing: UPDATE MemberT SET deleteFlag=1 WHERE (memberId = ?) 
+ ==> Parameters: b9d8cbd6664640b18eab932d88379b2d(String)
+ <==    Updates: 1
+ ==>  Preparing: DELETE FROM MemberT WHERE (memberId = ?) 
+ ==> Parameters: b9d8cbd6664640b18eab932d88379b2d(String)
+ <==    Updates: 1
 </pre>
 
 </hr>
