@@ -103,7 +103,7 @@ public class QueryHandler {
         }
         String str = "";
         for (int i = 0; i < querySize; i++) {
-            str = str + ",#{data." + fieldName + "[" + i + "]}";
+            str = str + ",#{" + fieldName + "[" + i + "]}";
         }
         return "(" + str.replaceFirst(",", "") + ")";
     }
