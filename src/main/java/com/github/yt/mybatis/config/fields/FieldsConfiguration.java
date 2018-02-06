@@ -15,12 +15,12 @@ public class FieldsConfiguration {
         Object object = null;
         boolean error = false;
         try {
-            object = SpringContextUtils.getBean("ytFieldsDefault");
+            object = SpringContextUtils.getBean("ytFieldsConfig");
         } catch (NoSuchBeanDefinitionException e) {
             error = true;
         }
         if (error || object == null) {
-            fieldsDefault = (FieldsDefault) SpringContextUtils.getBean("defaultFieldsDefault");
+            fieldsDefault = new DefaultFieldsDefault();
         } else {
             fieldsDefault = (FieldsDefault) object;
         }

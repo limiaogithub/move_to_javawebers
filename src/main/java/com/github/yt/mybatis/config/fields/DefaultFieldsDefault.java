@@ -1,10 +1,6 @@
 package com.github.yt.mybatis.config.fields;
 
 
-import org.springframework.stereotype.Service;
-
-
-@Service("defaultFieldsDefault")
 public class DefaultFieldsDefault implements FieldsDefault {
 
 
