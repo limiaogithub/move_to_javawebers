@@ -14,13 +14,14 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 <h3>特性</h3>
 1.免费开源</br>
 2.一键接入增删改查</br>
-3.支持CURD单表操作，多表请写xml</br>
-4.支持domain默认值自动注入，可以自定义注入值</br>
-5.支持limit分页，可以重写获取前台请求limit,offset方法</br>
-6.支持spring-boot</br>
-7.提供BaseAccidentException和BaseErrorException</br>
-<b>8.提供全新代码生成器</b></br>
-<b>9.提供example工程，一键测试运行</b></br>
+3.支持CURD单表操作</br>
+<b>4.支持级联join查询</b>推荐复杂join写xml</br>
+5.支持domain默认值自动注入，可以自定义注入值</br>
+6.支持limit分页，可以重写获取前台请求limit,offset方法</br>
+7.支持spring-boot</br>
+8.提供BaseAccidentException和BaseErrorException</br>
+<b>9.提供全新代码生成器</b></br>
+<b>10.提供example工程，一键测试运行</b></br>
 
 <h3>准备</h3>
 1.mysql数据库</br>
@@ -88,6 +89,12 @@ public class TestServiceImpl implements TestService {
 
         //测试delete
         testMapper.delete(MemberT.class, member.getMemberId());
+
+        //测试级联查询，不建议复杂场景使用，不宜维护
+        QueryHandler queryHandler2 = new QueryHandler();
+        //queryHandler.configPage();
+        List list2 = testMapper.findAll(new MemberT(), queryHandler2.addJoinHandle("cardt.*", SQLJoinHandler.JoinType.LEFT_OUTER_JOIN, "cardt cardt on t.memberId=cardt.memberId"));
+        System.out.println(list2.size());
     }
 }
 </pre>
@@ -118,6 +125,9 @@ public class TestServiceImpl implements TestService {
  ==>  Preparing: DELETE FROM MemberT WHERE (memberId = ?) 
  ==> Parameters: b9d8cbd6664640b18eab932d88379b2d(String)
  <==    Updates: 1
+ ==>  Preparing: SELECT t.* , cardt.* FROM MemberT t LEFT OUTER JOIN cardt cardt on t.memberId=cardt.memberId 
+ ==>  Parameters: 
+ <==      Total: 2
 </pre>
 
 </hr>
