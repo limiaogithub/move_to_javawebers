@@ -66,7 +66,7 @@ public class TestServiceImpl implements TestService {
         //测试findById
         member = testMapper.find(MemberT.class, member.getMemberId());
 
-        // //测试findAll，= 、in
+        //测试findAll，= 、in
         QueryHandler queryHandler = new QueryHandler();
         List<String> queryList = new ArrayList<>();
         queryList.add("18888888888");
