@@ -217,3 +217,54 @@ public class JavaBuild {
 </pre>
 
 
+<h3>其他配置</h3>
+1.自定义字段注入来源</br>
+创建MyFieldsConfig类，实现FieldsDefault接口，指定service名字为"ytFieldsConfig"。
+<pre>
+@Service("ytFieldsConfig")
+public class MyFieldsConfig implements FieldsDefault {
+
+
+    @Override
+    public String getOperator() {
+        return (String) getSessionAttr("Operator");
+    }
+
+    @Override
+    public String getOperatorId() {
+        return (String) getSessionAttr("OperatorId");
+    }
+
+    @Override
+    public String getModifyOperator() {
+        return (String) getSessionAttr("Operator");
+    }
+
+    @Override
+    public String getModifyOperatorId() {
+        return (String) getSessionAttr("OperatorId");
+    }
+
+    private Object getSessionAttr(String attr) {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession()
+                .getAttribute(attr);
+    }
+
+}
+</pre>
+
+2.自定义分页处理类</br>
+创建MyPageConfig类，实现PageConvert接口，指定service名字为"ytPageConfig"。
+<pre>
+@Service("ytPageConfig")
+//这里的目的是设置queryHandler中的start(从第几条读)和 limit（读取多少条）；如果不设置这个service，将默认读取CommonPageService中的配置
+public class MyPageConfig implements PageConvert {
+
+    @Override
+    public void convert(QueryHandler queryHandler, HttpServletRequest request) {
+        queryHandler.setStart(0);
+        queryHandler.setLimit(20);
+    }
+}
+</pre>
+
