@@ -171,7 +171,7 @@ public class MemberController extends BaseController
 
 
 <h3>代码生成器</h3>
-1.请先在数据库中创建表，yt_mybatis推荐您每张表中都包含如下字段，我们为您推荐的BaseEntity中就包含这些字段，您只需继承即可。
+1.请先在数据库中创建表，yt_mybatis推荐您每张表都包含如下字段，您只需要继承BaseEntity对象即可。
 <pre>
 `founderId` varchar(36) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '创建人ID',
 `founderName` varchar(30) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '创建人姓名',
