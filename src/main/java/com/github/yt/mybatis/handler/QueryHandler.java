@@ -20,6 +20,8 @@ public class QueryHandler {
     //扩展数据
     private Map<String, Object> expandData = new HashMap<>();
 
+    private LinkedList<SQLJoinHandler> sqlJoinHandler = new LinkedList<>();
+
     private Integer start;
 
     private Integer limit;
@@ -89,6 +91,11 @@ public class QueryHandler {
 
     public QueryHandler configPage() {
         PageConfiguration.create().convert(this, getHttpServletRequest());
+        return this;
+    }
+
+    public QueryHandler addJoinHandle(String selectColumns, SQLJoinHandler.JoinType joinType, String joinSql) {
+        sqlJoinHandler.add(new SQLJoinHandler(selectColumns, joinType, joinSql));
         return this;
     }
 

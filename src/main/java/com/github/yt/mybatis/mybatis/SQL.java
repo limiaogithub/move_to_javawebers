@@ -1,10 +1,12 @@
 package com.github.yt.mybatis.mybatis;
 
+import com.github.yt.mybatis.handler.SQLJoinHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.jdbc.AbstractSQL;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -12,6 +14,7 @@ public class SQL extends AbstractSQL<SQL> {
 
     private static final String AND = ") \nAND (";
     private static final String OR = ") \nOR (";
+
 
     @Override
     public SQL getSelf() {
@@ -82,6 +85,36 @@ public class SQL extends AbstractSQL<SQL> {
 
     public SQL FROM(String table) {
         sql().tables.add(table);
+        return getSelf();
+    }
+
+    public SQL JOIN(String join) {
+        sql().sqlJoins.add(new SQLJoinHandler(SQLJoinHandler.JoinType.JOIN, join));
+//        sql().join.add(join);
+        return getSelf();
+    }
+
+    public SQL INNER_JOIN(String join) {
+        sql().sqlJoins.add(new SQLJoinHandler(SQLJoinHandler.JoinType.INNER_JOIN, join));
+//        sql().innerJoin.add(join);
+        return getSelf();
+    }
+
+    public SQL LEFT_OUTER_JOIN(String join) {
+        sql().sqlJoins.add(new SQLJoinHandler(SQLJoinHandler.JoinType.LEFT_OUTER_JOIN, join));
+//        sql().leftOuterJoin.add(join);
+        return getSelf();
+    }
+
+    public SQL RIGHT_OUTER_JOIN(String join) {
+        sql().sqlJoins.add(new SQLJoinHandler(SQLJoinHandler.JoinType.RIGHT_OUTER_JOIN, join));
+//        sql().rightOuterJoin.add(join);
+        return getSelf();
+    }
+
+    public SQL OUTER_JOIN(String join) {
+        sql().sqlJoins.add(new SQLJoinHandler(SQLJoinHandler.JoinType.OUTER_JOIN, join));
+//        sql().outerJoin.add(join);
         return getSelf();
     }
 
@@ -170,6 +203,12 @@ public class SQL extends AbstractSQL<SQL> {
         List<String> sets = new ArrayList<String>();
         List<String> select = new ArrayList<String>();
         List<String> tables = new ArrayList<String>();
+        List<SQLJoinHandler> sqlJoins = new ArrayList<SQLJoinHandler>();
+        List<String> join = new ArrayList<String>();
+        List<String> innerJoin = new ArrayList<String>();
+        List<String> outerJoin = new ArrayList<String>();
+        List<String> leftOuterJoin = new ArrayList<String>();
+        List<String> rightOuterJoin = new ArrayList<String>();
         List<String> where = new ArrayList<String>();
         List<String> having = new ArrayList<String>();
         List<String> groupBy = new ArrayList<String>();
@@ -177,8 +216,8 @@ public class SQL extends AbstractSQL<SQL> {
         List<String> lastList = new ArrayList<String>();
         List<String> columns = new ArrayList<String>();
         List<String> values = new ArrayList<String>();
-        List<String> batchValues = new ArrayList<String>();
-        List<String> batchColumns = new ArrayList<String>();
+        List<String> batchValues = new ArrayList<>();
+        List<String> batchColumns = new ArrayList<>();
         boolean distinct;
 
         private void sqlClause(SafeAppendable builder, String keyword, List<String> parts, String open, String close,
@@ -209,6 +248,31 @@ public class SQL extends AbstractSQL<SQL> {
                 sqlClause(builder, "SELECT", select, "", "", ", ");
             }
             sqlClause(builder, "FROM", tables, "", "", ", ");
+            for (SQLJoinHandler sqlJoin : sqlJoins) {
+                switch (sqlJoin.getJoinType()) {
+                    case JOIN: {
+                        sqlClause(builder, "JOIN", Arrays.asList(sqlJoin.getJoinSql()), "", "", "\nJOIN ");
+                        break;
+                    }
+                    case INNER_JOIN: {
+                        sqlClause(builder, "INNER JOIN", Arrays.asList(sqlJoin.getJoinSql()), "", "", "\nINNER JOIN ");
+                        break;
+                    }
+                    case LEFT_OUTER_JOIN: {
+                        sqlClause(builder, "LEFT OUTER JOIN", Arrays.asList(sqlJoin.getJoinSql()), "", "", "\nLEFT OUTER JOIN ");
+                        break;
+                    }
+                    case RIGHT_OUTER_JOIN: {
+                        sqlClause(builder, "RIGHT OUTER JOIN", Arrays.asList(sqlJoin.getJoinSql()), "", "", "\nRIGHT OUTER JOIN ");
+                        break;
+                    }
+                    case OUTER_JOIN: {
+                        sqlClause(builder, "OUTER JOIN", Arrays.asList(sqlJoin.getJoinSql()), "", "", "\nOUTER JOIN ");
+                        break;
+                    }
+
+                }
+            }
             sqlClause(builder, "WHERE", where, "(", ")", " AND ");
             sqlClause(builder, "GROUP BY", groupBy, "", "", ", ");
             sqlClause(builder, "HAVING", having, "(", ")", " AND ");
@@ -237,7 +301,6 @@ public class SQL extends AbstractSQL<SQL> {
         }
 
         private String updateSQL(SafeAppendable builder) {
-
             sqlClause(builder, "UPDATE", tables, "", "", "");
             sqlClause(builder, "SET", sets, "", "", ", ");
             sqlClause(builder, "WHERE", where, "(", ")", " AND ");

@@ -5,6 +5,7 @@ import com.github.yt.mybatis.dao.BaseMapper;
 import com.github.yt.mybatis.dao.MapperProvider;
 import com.github.yt.mybatis.exception.BaseErrorException;
 import com.github.yt.mybatis.handler.QueryHandler;
+import com.github.yt.mybatis.handler.SQLJoinHandler;
 import com.github.yt.mybatis.utils.BeanUtils;
 import com.github.yt.mybatis.utils.ChainMap;
 import com.github.yt.mybatis.utils.JPAUtils;
@@ -117,6 +118,41 @@ public class SearchProvider extends MapperProvider {
             List<String> whereSqlList = (List<String>) param.get("whereSqls");
             for (String whereSql : whereSqlList) {
                 WHERE(whereSql);
+            }
+        }
+        if (param.containsKey("sqlJoinHandler")) {
+            List<SQLJoinHandler> sqlJoinHandles = (List<SQLJoinHandler>) param.get("sqlJoinHandler");
+            for (SQLJoinHandler sqlJoin : sqlJoinHandles) {
+                switch (sqlJoin.getJoinType()) {
+                    case JOIN: {
+                        JOIN(sqlJoin.getJoinSql());
+                        if (StringUtils.isNotEmpty(sqlJoin.getSelectColumns()) && !isCount) {
+                            SELECT(sqlJoin.getSelectColumns());
+                        }
+                        break;
+                    }
+                    case INNER_JOIN: {
+                        INNER_JOIN(sqlJoin.getJoinSql());
+                        if (StringUtils.isNotEmpty(sqlJoin.getSelectColumns()) && !isCount) {
+                            SELECT(sqlJoin.getSelectColumns());
+                        }
+                        break;
+                    }
+                    case LEFT_OUTER_JOIN: {
+                        LEFT_OUTER_JOIN(sqlJoin.getJoinSql());
+                        if (StringUtils.isNotEmpty(sqlJoin.getSelectColumns()) && !isCount) {
+                            SELECT(sqlJoin.getSelectColumns());
+                        }
+                        break;
+                    }
+                    case RIGHT_OUTER_JOIN: {
+                        RIGHT_OUTER_JOIN(sqlJoin.getJoinSql());
+                        if (StringUtils.isNotEmpty(sqlJoin.getSelectColumns()) && !isCount) {
+                            SELECT(sqlJoin.getSelectColumns());
+                        }
+                        break;
+                    }
+                }
             }
         }
     }
