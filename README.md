@@ -173,13 +173,13 @@ public class MemberController extends BaseController
 <h3>代码生成器</h3>
 1.请先在数据库中创建表，yt_mybatis推荐您每张表都包含如下字段，您只需要继承BaseEntity对象即可。
 <pre>
-`founderId` varchar(36) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '创建人ID',
-`founderName` varchar(30) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '创建人姓名',
-`modifierId` varchar(36) CHARACTER SET utf8 DEFAULT NULL COMMENT '修改人ID',
-`modifierName` varchar(30) CHARACTER SET utf8 DEFAULT NULL COMMENT '修改人姓名',
-`createDateTime` datetime NOT NULL COMMENT '创建时间',
-`modifyDateTime` datetime DEFAULT NULL COMMENT '修改时间',
-`deleteFlag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除 0 否 1是',
+`founderId` varchar(36) DEFAULT '' COMMENT '创建人ID',
+`founderName` varchar(30) DEFAULT '' COMMENT '创建人姓名',
+`modifierId` varchar(36) DEFAULT '' COMMENT '修改人ID',
+`modifierName` varchar(30) DEFAULT '' COMMENT '修改人姓名',
+`createDateTime` datetime NOT NULL DEFAULT '1000-01-01 00:00:00' COMMENT '创建时间',
+`modifyDateTime` datetime NOT NULL DEFAULT '1000-01-01 00:00:00' COMMENT '修改时间',
+`deleteFlag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除 0 否 1是'
 </pre>
 
 
