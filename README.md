@@ -71,7 +71,7 @@ public class TestServiceImpl implements TestService {
         List<String> queryList = new ArrayList<>();
         queryList.add("18888888888");
         queryList.add("18888888889");
-        queryHandler.addWhereSql("t.age=#{data.age1} and t.phone in" + QueryHandler.getInSql("phone1", queryList.size()));
+        queryHandler.addWhereSql("t.age=#{data.age1} and t.phone in" + QueryHandler.getInSql("data.phone1", queryList.size()));
         queryHandler.addExpandData("age1", 30);
         queryHandler.addExpandData("phone1", queryList.toArray());
         List<MemberT> list = testMapper.findAll(new MemberT(), queryHandler);
@@ -171,7 +171,19 @@ public class MemberController extends BaseController
 
 
 <h3>代码生成器</h3>
-1.新建JavaBuild类，代码示例如下，运行test()方法即可，代码会直接生成在modulePackage配置目录下</br>
+1.请先在数据库中创建表，yt_mybatis推荐您每张表中都包含如下字段，我们为您推荐的BaseEntity中就包含这些字段，您只需继承即可。
+<pre>
+`founderId` varchar(36) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '创建人ID',
+`founderName` varchar(30) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '创建人姓名',
+`modifierId` varchar(36) CHARACTER SET utf8 DEFAULT NULL COMMENT '修改人ID',
+`modifierName` varchar(30) CHARACTER SET utf8 DEFAULT NULL COMMENT '修改人姓名',
+`createDateTime` datetime NOT NULL COMMENT '创建时间',
+`modifyDateTime` datetime DEFAULT NULL COMMENT '修改时间',
+`deleteFlag` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除 0 否 1是',
+</pre>
+
+
+2.新建JavaBuild类，代码示例如下，运行test()方法即可，代码会直接生成在modulePackage配置目录下</br>
 
 <pre>
 import com.github.yt.generator.JavaCodeGenerator;
