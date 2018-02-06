@@ -15,7 +15,7 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 1.免费开源</br>
 2.一键接入增删改查</br>
 3.支持CURD单表操作</br>
-<b>4.支持级联join查询</b>推荐复杂join写xml</br>
+<b>4.支持级联join查询</b>&nbsp;&nbsp;复杂join推荐写xml</br>
 5.支持domain默认值自动注入，可以自定义注入值</br>
 6.支持limit分页，可以重写获取前台请求limit,offset方法</br>
 7.支持spring-boot</br>
