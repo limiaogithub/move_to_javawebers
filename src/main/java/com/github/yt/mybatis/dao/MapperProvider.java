@@ -1,6 +1,7 @@
 package com.github.yt.mybatis.dao;
 
-import com.github.yt.mybatis.exception.BaseErrorException;
+
+import com.github.yt.base.exception.BaseErrorException;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.Table;

@@ -4,7 +4,7 @@ package com.github.yt.mybatis.dao.provider;
 import com.github.yt.mybatis.dao.BaseMapper;
 import com.github.yt.mybatis.dao.MapperProvider;
 import com.github.yt.mybatis.domain.BaseEntity;
-import com.github.yt.mybatis.exception.BaseErrorException;
+import com.github.yt.base.exception.BaseErrorException;
 import com.github.yt.mybatis.utils.JPAUtils;
 import org.apache.commons.lang3.StringUtils;
 

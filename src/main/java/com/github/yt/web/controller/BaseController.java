@@ -1,6 +1,7 @@
 package com.github.yt.web.controller;
 
-import com.github.yt.mybatis.exception.BaseAccidentException;
+
+import com.github.yt.base.exception.BaseAccidentException;
 import com.github.yt.web.result.HttpResultEntity;
 import com.github.yt.web.result.HttpResultHandler;
 import com.github.yt.web.utils.WebUtils;

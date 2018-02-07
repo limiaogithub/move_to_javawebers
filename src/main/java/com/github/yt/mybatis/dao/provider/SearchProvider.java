@@ -3,7 +3,7 @@ package com.github.yt.mybatis.dao.provider;
 
 import com.github.yt.mybatis.dao.BaseMapper;
 import com.github.yt.mybatis.dao.MapperProvider;
-import com.github.yt.mybatis.exception.BaseErrorException;
+import com.github.yt.base.exception.BaseErrorException;
 import com.github.yt.mybatis.handler.QueryHandler;
 import com.github.yt.mybatis.handler.SQLJoinHandler;
 import com.github.yt.mybatis.utils.BeanUtils;

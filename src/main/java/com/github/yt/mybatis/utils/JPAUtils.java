@@ -1,6 +1,6 @@
 package com.github.yt.mybatis.utils;
 
-import com.github.yt.mybatis.exception.BaseErrorException;
+import com.github.yt.base.exception.BaseErrorException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
