@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.lang.reflect.Field;
@@ -155,5 +156,45 @@ public class JPAUtils {
             }
         }
         return result;
+    }
+
+    public static String getAnnotationColumnName(Field field) {
+        Column columnAnnotation = field.getAnnotation(Column.class);
+        if (columnAnnotation == null || StringUtils.isEmpty(columnAnnotation.name())) {
+            return field.getName();
+        }
+        return columnAnnotation.name();
+    }
+
+    public static String getSearchAnnotationColumnName(Field field) {
+        return getSearchAnnotationColumnName(field, "");
+    }
+
+    public static String getSearchAnnotationColumnName(Field field, String aliasName) {
+        Column columnAnnotation = field.getAnnotation(Column.class);
+        if (columnAnnotation == null || StringUtils.isEmpty(columnAnnotation.name())) {
+            return aliasName + field.getName();
+        }
+        return aliasName + columnAnnotation.name() + " as " + field.getName();
+    }
+
+    public static String getSelectSql(Class<?> entityClass) {
+        return getSelectSql(entityClass, "");
+    }
+
+    public static String getSelectSql(Class<?> entityClass, String aliasName) {
+        String selectSql = "";
+        for (Field field : JPAUtils.getAllFields(entityClass)) {
+            field.setAccessible(true);
+            String fieldName = JPAUtils.getSearchAnnotationColumnName(field, aliasName);
+            if (StringUtils.isNotEmpty(fieldName)) {
+                selectSql = selectSql + "," + fieldName + "";
+            }
+        }
+        selectSql = selectSql.replaceFirst(",", "");
+        if (StringUtils.isEmpty(selectSql)) {
+            return aliasName + "*";
+        }
+        return selectSql;
     }
 }

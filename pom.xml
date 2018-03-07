@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.limiaogithub</groupId>
     <artifactId>yt_mybatis</artifactId>
-    <version>2.0.7</version>
+    <version>3.0.1</version>
     <url>https://github.com/limiaogithub/yt_mybatis</url>
     <name>yt_mybatis</name>
     <description>CURD on mybaits</description>

@@ -1,10 +1,10 @@
 package com.github.yt.mybatis.dao.provider;
 
 
+import com.github.yt.base.exception.BaseErrorException;
 import com.github.yt.mybatis.dao.BaseMapper;
 import com.github.yt.mybatis.dao.MapperProvider;
 import com.github.yt.mybatis.domain.BaseEntity;
-import com.github.yt.base.exception.BaseErrorException;
 import com.github.yt.mybatis.utils.JPAUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,11 +31,12 @@ public class SaveProvider extends MapperProvider {
                 idField = field;
                 continue;
             }
+            String fieldName = JPAUtils.getAnnotationColumnName(field);
             Object value = JPAUtils.getValue(param.get(BaseMapper.ENTITY), field.getName());
             if (null == value) {
                 continue;
             }
-            VALUES(field.getName(), StringUtils.join("#{", BaseMapper.ENTITY, ".", field.getName(), "}"));
+            VALUES(fieldName, StringUtils.join("#{", BaseMapper.ENTITY, ".", field.getName(), "}"));
         }
         if (null == idField) {
             throw new BaseErrorException(StringUtils.join(entityClass.getName(), "实体未配置@Id "));
@@ -59,11 +60,12 @@ public class SaveProvider extends MapperProvider {
                     idField = field;
                     continue;
                 }
+                String fieldName = JPAUtils.getAnnotationColumnName(field);
                 Object value = JPAUtils.getValue(((List) param.get(BaseMapper.ENTITIES)).get(i), field.getName());
                 if (null == value) {
                     continue;
                 }
-                BATCH_VALUES(field.getName(), StringUtils.join("#{", BaseMapper.ENTITIES, "[", i, "]", ".", field.getName(), "}"));
+                BATCH_VALUES(fieldName, StringUtils.join("#{", BaseMapper.ENTITIES, "[", i, "]", ".", field.getName(), "}"));
             }
             if (null == idField) {
                 throw new BaseErrorException(StringUtils.join(entityClass.getName(), "实体未配置@Id "));
@@ -86,8 +88,9 @@ public class SaveProvider extends MapperProvider {
                 continue;
             }
             try {
+                String fieldName = JPAUtils.getAnnotationColumnName(field);
                 if (field.get(param.get(BaseMapper.ENTITY)) != null) {
-                    VALUES(field.getName(), StringUtils.join("#{", BaseMapper.ENTITY, ".", field.getName(), "}"));
+                    VALUES(fieldName, StringUtils.join("#{", BaseMapper.ENTITY, ".", field.getName(), "}"));
                 }
             } catch (IllegalAccessException e) {
                 throw new BaseErrorException(e);
@@ -105,12 +108,13 @@ public class SaveProvider extends MapperProvider {
             return;
         }
         try {
+            String fieldName = JPAUtils.getAnnotationColumnName(idField);
             if (StringUtils.isNotEmpty((String) idField.get(param.get(BaseMapper.ENTITY)))) {
-                VALUES(idField.getName(), StringUtils.join("#{", BaseMapper.ENTITY, ".", idField.getName(), "}"));
+                VALUES(fieldName, StringUtils.join("#{", BaseMapper.ENTITY, ".", idField.getName(), "}"));
                 return;
             }
             String id = UUID.randomUUID().toString().replace("-", "");
-            VALUES(idField.getName(), StringUtils.join("'", id, "'"));
+            VALUES(fieldName, StringUtils.join("'", id, "'"));
             idField.set(param.get(BaseMapper.ENTITY), id);
         } catch (IllegalAccessException e) {
             throw new BaseErrorException(e);
@@ -122,12 +126,13 @@ public class SaveProvider extends MapperProvider {
             return;
         }
         try {
+            String fieldName = JPAUtils.getAnnotationColumnName(idField);
             if (StringUtils.isNotEmpty((String) idField.get(baseEntity))) {
-                BATCH_VALUES(idField.getName(), StringUtils.join("#{", BaseMapper.ENTITIES, "[", i, "]", ".", idField.getName(), "}"));
+                BATCH_VALUES(fieldName, StringUtils.join("#{", BaseMapper.ENTITIES, "[", i, "]", ".", idField.getName(), "}"));
                 return;
             }
             String id = UUID.randomUUID().toString().replace("-", "");
-            BATCH_VALUES(idField.getName(), StringUtils.join("'", id, "'"));
+            BATCH_VALUES(fieldName, StringUtils.join("'", id, "'"));
             idField.set(baseEntity, id);
         } catch (IllegalAccessException e) {
             throw new BaseErrorException(e);

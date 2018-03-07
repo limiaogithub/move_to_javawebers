@@ -30,17 +30,13 @@ public class ModifyProvider extends MapperProvider {
             if (field.getType().isAssignableFrom(Collection.class) || null != field.getType().getAnnotation(Table.class)) {
                 continue;
             }
-            Annotation columnAnnotation = field.getAnnotation(Column.class);
-            if (null != columnAnnotation && ((Column) columnAnnotation).nullable() == false
-                    && null == JPAUtils.getValue(param.get(BaseMapper.ENTITY), field.getName())) {
-                continue;
-            }
+            String fieldName = JPAUtils.getAnnotationColumnName(field);
             if (null == field.getAnnotation(Id.class)) {
-                SET(StringUtils.join(getEqualsValue(field.getName(), StringUtils.join(BaseMapper.ENTITY, ".", field.getName()))));
+                SET(StringUtils.join(getEqualsValue(fieldName, StringUtils.join(BaseMapper.ENTITY, ".", field.getName()))));
                 continue;
             }
             idField = field;
-            WHERE(getEqualsValue(field.getName(), StringUtils.join(BaseMapper.ENTITY, ".", field.getName())));
+            WHERE(getEqualsValue(fieldName, StringUtils.join(BaseMapper.ENTITY, ".", field.getName())));
         }
         if (null == idField) {
             throw new BaseErrorException(StringUtils.join(entityClass.getName(), "实体未配置@Id "));
@@ -66,12 +62,12 @@ public class ModifyProvider extends MapperProvider {
             if (null == value) {
                 continue;
             }
-            SET(StringUtils.join(getEqualsValue(field.getName(), StringUtils.join(BaseMapper.ENTITY, ".", field.getName()))));
+            SET(StringUtils.join(getEqualsValue(JPAUtils.getAnnotationColumnName(field), StringUtils.join(BaseMapper.ENTITY, ".", field.getName()))));
         }
         if (null == idField) {
             throw new BaseErrorException(StringUtils.join(entityClass.getName(), "实体未配置@Id "));
         }
-        WHERE(getEqualsValue(idField.getName(), StringUtils.join(BaseMapper.ENTITY, ".", idField.getName())));
+        WHERE(getEqualsValue(JPAUtils.getAnnotationColumnName(idField), StringUtils.join(BaseMapper.ENTITY, ".", idField.getName())));
         return sql();
     }
 

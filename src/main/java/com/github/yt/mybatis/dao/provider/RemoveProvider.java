@@ -22,7 +22,7 @@ public class RemoveProvider extends MapperProvider {
             throw new BaseErrorException(StringUtils.join(entityClass.getName(), ",删除时主键不能为空!"));
         }
         DELETE_FROM(getTableName(entityClass));
-        WHERE(getEqualsValue(JPAUtils.getIdField(entityClass).getName(), BaseMapper.ID));
+        WHERE(getEqualsValue(JPAUtils.getAnnotationColumnName(JPAUtils.getIdField(entityClass)), BaseMapper.ID));
         return sql();
     }
 
@@ -34,7 +34,7 @@ public class RemoveProvider extends MapperProvider {
         }
         UPDATE(getTableName(entityClass));
         SET(BaseEntity.DELETE_FLAG + "=1");
-        WHERE(getEqualsValue(JPAUtils.getIdField(entityClass).getName(), BaseMapper.ID));
+        WHERE(getEqualsValue(JPAUtils.getAnnotationColumnName(JPAUtils.getIdField(entityClass)), BaseMapper.ID));
         return sql();
     }
 

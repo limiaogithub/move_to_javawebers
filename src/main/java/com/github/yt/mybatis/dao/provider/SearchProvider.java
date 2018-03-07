@@ -1,9 +1,9 @@
 package com.github.yt.mybatis.dao.provider;
 
 
+import com.github.yt.base.exception.BaseErrorException;
 import com.github.yt.mybatis.dao.BaseMapper;
 import com.github.yt.mybatis.dao.MapperProvider;
-import com.github.yt.base.exception.BaseErrorException;
 import com.github.yt.mybatis.handler.QueryHandler;
 import com.github.yt.mybatis.handler.SQLJoinHandler;
 import com.github.yt.mybatis.utils.BeanUtils;
@@ -30,11 +30,12 @@ public class SearchProvider extends MapperProvider {
         if (param.get(BaseMapper.ID) == null || StringUtils.isEmpty(param.get(BaseMapper.ID).toString())) {
             throw new BaseErrorException(StringUtils.join(entityClass.getName(), ",find单个对象时主键不能为空!"));
         }
-        SELECT("*");
+        SELECT(JPAUtils.getSelectSql(entityClass));
         FROM(getTableName(entityClass));
-        WHERE(getEqualsValue(JPAUtils.getIdField(entityClass).getName(), BaseMapper.ID));
+        WHERE(getEqualsValue(JPAUtils.getAnnotationColumnName(JPAUtils.getIdField(entityClass)), BaseMapper.ID));
         return sql();
     }
+
 
     public String findAll(Map<String, Object> param) {
         begin();
@@ -45,7 +46,7 @@ public class SearchProvider extends MapperProvider {
         param.put(BaseMapper.ENTITY_CLASS, param.get(BaseMapper.ENTITY).getClass());
         Class<?> entityClass = param.get(BaseMapper.ENTITY).getClass();
         Map<String, Object> map = ((Map<String, Object>) param.get(BaseMapper.DATA));
-        String selectColumnSql = createSelectColumnSql(map);
+        String selectColumnSql = createSelectColumnSql(entityClass, map);
         if (MapUtils.isNotEmpty(map) && map.containsKey("distinct")) {
             SELECT_DISTINCT(selectColumnSql);
         } else {
@@ -91,7 +92,7 @@ public class SearchProvider extends MapperProvider {
         if (null != field.getType().getAnnotation(Table.class)) {
             return false;
         }
-        WHERE(StringUtils.join("t.", getEqualsValue(field.getName(), StringUtils.join(BaseMapper.DATA + ".", field.getName()))));
+        WHERE(StringUtils.join("t.", getEqualsValue(JPAUtils.getAnnotationColumnName(field), StringUtils.join(BaseMapper.DATA + ".", field.getName()))));
         return true;
     }
 
@@ -163,7 +164,7 @@ public class SearchProvider extends MapperProvider {
 
     private String createSelectCountColumnSql(Map<String, Object> param) {
         Map<String, Object> map = ((Map<String, Object>) param.get(BaseMapper.DATA));
-        String selectColumnSql = "count(distinct t." + JPAUtils.getIdField((Class<?>) param.get(BaseMapper.ENTITY_CLASS)).getName() + ")";
+        String selectColumnSql = "count(distinct t." + JPAUtils.getAnnotationColumnName(JPAUtils.getIdField((Class<?>) param.get(BaseMapper.ENTITY_CLASS))) + ")";
         if (map == null) {
             return selectColumnSql;
         }
@@ -173,8 +174,8 @@ public class SearchProvider extends MapperProvider {
         return selectColumnSql;
     }
 
-    private String createSelectColumnSql(Map<String, Object> map) {
-        String selectColumnSql = " t.* ";
+    private String createSelectColumnSql(Class<?> entityClass, Map<String, Object> map) {
+        String selectColumnSql = JPAUtils.getSelectSql(entityClass, "t.");
         if (MapUtils.isNotEmpty(map) && map.containsKey("selectColumnSql") && map.get("selectColumnSql") != null) {
             selectColumnSql = " " + map.get("selectColumnSql").toString() + " ";
         }
