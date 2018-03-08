@@ -34,7 +34,7 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 &lt;dependency&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;com.github.limiaogithub&lt;/groupId&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;yt_mybatis&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.0.7&lt;/version&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;3.0.1&lt;/version&gt;
 &lt;/dependency&gt;
 </pre>
 2.你的mapper继承BaseMapper<T></br>
