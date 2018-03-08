@@ -139,7 +139,7 @@ public class TestServiceImpl implements TestService {
 &lt;dependency&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;com.github.limiaogithub&lt;/groupId&gt;
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;yt_mybatis&lt;/artifactId&gt;
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;2.0.7&lt;/version&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;3.0.1&lt;/version&gt;
 &lt;/dependency&gt;
 </pre>
 2.你的mapper继承BaseMapper<T></br>
