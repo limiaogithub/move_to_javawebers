@@ -21,7 +21,11 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 7.提供BaseAccidentException和BaseErrorException</br>
 <b>8.提供全新代码生成器</b></br>
 <b>9.提供example工程，一键测试运行</b></br>
-
+<b>new~ 10.支持domain自定义映射数据库字段名称</b></br>
+<pre>
+@Column(name="member_name")
+    private String userName;
+</pre>
 <h3>准备</h3>
 1.mysql数据库</br>
 2.idea开发工具</br>
