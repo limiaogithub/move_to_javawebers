@@ -11,6 +11,10 @@ yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请�
 您可以下载https://github.com/limiaogithub/yt_mybatis_example 直接运行示例代码。</br>
 您还可以下载https://github.com/limiaogithub/yt_antd_pro 结合前后端一起运行查看增删改查效果，这是目前最新的基于react的ant design技术，前后端分离最佳实践</br>
 
+<h3>为什么使用yt_mybatis</h3>
+yt_mybatis的意义在于增加了一些编码约定，比如创建人、创建时间、修改人、修改时间等字段，一般的业务系统表中都应该存储，为了防止设计缺陷，架构师可以使用yt_mybatis强行约定继承框架的实体类，具体的值会默认注入。</br>
+yt_mybatis还在持续维护中，目的在于让开发人员效率提升三倍，代码更加简洁、异常等控制更加完善。</br>
+
 <h3>特性</h3>
 1.免费开源</br>
 2.一键接入增删改查</br>
