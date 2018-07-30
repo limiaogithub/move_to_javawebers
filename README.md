@@ -1,7 +1,7 @@
 # yt_mybatis
 
 </br>
-欢迎加入QQ群~ 489333310，我们一起进步，不限于mybatis。
+欢迎加入QQ群~ 489333310~，我们一起进步，不限于mybatis。
 </br>
 <h3>介绍</h3>
 yt_mybatis是基于mybaits封装的CURD项目；也同时提供了从web端请求到数据库，再返回给前端的一整套解决方案</br>
